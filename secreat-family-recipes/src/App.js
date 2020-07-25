@@ -36,6 +36,9 @@ function App() {
       username: loginFormValues.username,
       password: loginFormValues.password,
     }
+    //reset login form
+    setLoginFormValues(initialLoginValues)
+    
     //this data needs be check with the back-end
   }
 
