@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+export default function Login({ loginFormValues, handleChange, onSubmit, loginErrorMessages }) {
 
-export default function Login({ loginFormValues, handleChange, onSubmit }) {
- 
 
   return (
     <Segment placeholder>
@@ -33,7 +33,9 @@ export default function Login({ loginFormValues, handleChange, onSubmit }) {
         </Grid.Column>
 
         <Grid.Column verticalAlign='middle'>
-          <Button content='Sign up' icon='signup' size='big' />
+          <Link to='/singup'>
+            <Button content='Sign up' icon='signup' size='big' />
+          </Link>
         </Grid.Column>
       </Grid>
 

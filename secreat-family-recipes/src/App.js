@@ -38,7 +38,7 @@ function App() {
     }
     //reset login form
     setLoginFormValues(initialLoginValues)
-    
+
     //this data needs be check with the back-end
   }
 
@@ -48,7 +48,12 @@ function App() {
 
       <Switch>
         <Route path='/login'>
-          <Login loginFormValues={loginFormValues} handleChange={handleChange} onSubmit={onSubmit} />
+          <Login
+            loginFormValues={loginFormValues}
+            handleChange={handleChange}
+            onSubmit={onSubmit}
+            loginErrorMessages={loginErrorMessages}
+          />
         </Route>
       </Switch>
     </div>
