@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 
-const LoginOrSignUp = () => (
+const Login = () => (
   <Segment placeholder>
     <Grid columns={2} relaxed='very' stackable>
       <Grid.Column>
@@ -32,4 +32,4 @@ const LoginOrSignUp = () => (
   </Segment>
 )
 
-export default LoginOrSignUp
+export default Login
