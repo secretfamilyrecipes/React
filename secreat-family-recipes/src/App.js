@@ -35,7 +35,7 @@ function App() {
 
       <Switch>
         <Route path='/login'>
-          <Login />
+          <Login loginFormValues={loginFormValues} setLoginFormValues = {setLoginFormValues} loginErrorMessages={loginErrorMessages}/>
         </Route>
       </Switch>
     </div>

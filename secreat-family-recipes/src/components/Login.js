@@ -1,11 +1,16 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 
-export default function Login() {
+export default function Login({ loginFormValues, setLoginFormValues, loginErrorMessages }) {
   //event gabdkers
-  // const onInputChange = e => {
-  //   const { name, value } = e.target
-  // }
+  const handleChange = e => {
+    //update form values state to the current inputed values
+    e.persist()
+    const {name, checked, value} = e.target
+    e.target.tye === 'checkbox'
+      ? setLoginFormValues({ ...loginFormValues, [name]: checked})
+      : setLoginFormValues({ ...loginFormValues, [name]: value})
+  }
 
   return (
     <Segment placeholder>
