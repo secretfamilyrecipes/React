@@ -4,9 +4,9 @@ import { Switch, Route } from 'react-router-dom'
 
 //components
 import Login from './components/Login'
+import loginSchema from './validation/loginSchema'
 
-
-//initial values
+//Login initial values and errors
 const initialLoginValues = {
   username: '',
   password: '',
@@ -20,7 +20,6 @@ function App() {
   //form values states
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues)
   const [loginErrorMessages, setLoginErrorMessages] = useState(defaultLoginErrorMessages)
-  //default values
 
   //form validation
 
