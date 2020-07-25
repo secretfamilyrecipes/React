@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
-
+import * as yup from 'yup'
 //components
 import Login from './components/Login'
 import loginSchema from './validation/loginSchema'
@@ -26,9 +26,19 @@ function App() {
     //update form values state to the current inputed values
     e.persist()
     const { name, checked, value } = e.target
-    e.target.tye === 'checkbox'
+    e.target.type === 'checkbox'
       ? setLoginFormValues({ ...loginFormValues, [name]: checked })
       : setLoginFormValues({ ...loginFormValues, [name]: value })
+
+    yup
+    .reach(loginSchema, name)
+    .validate(value)
+    .then( () => {
+      setLoginErrorMessages({...loginErrorMessages, [name]: ''})
+    })
+    .catch( err => {
+      setLoginErrorMessages({...loginErrorMessages, [name]: err.errors[0]})
+    })
   }
   const onSubmit = e => {
     e.preventDefault()
