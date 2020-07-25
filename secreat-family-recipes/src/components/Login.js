@@ -10,7 +10,7 @@ const Styles = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
-  .error-message{
+  .error-message{ 
     margin: 1rem;
   }
 `
