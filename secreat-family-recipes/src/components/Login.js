@@ -18,6 +18,11 @@ export default function Login({ loginFormValues, handleChange, onSubmit, loginEr
               label='Username'
               placeholder='Username'
             />
+            <div className='error-message'>
+              <p>
+                {loginErrorMessages.username}
+              </p>
+            </div>
             <Form.Input
               name='password'
               value={loginFormValues.password}
@@ -27,6 +32,11 @@ export default function Login({ loginFormValues, handleChange, onSubmit, loginEr
               label='Password'
               type='password'
             />
+            <div className='error-message'>
+              <p>
+                {loginErrorMessages.password}
+              </p>
+            </div>
 
             <Button content='Login' primary />
           </Form>
