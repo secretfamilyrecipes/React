@@ -38,6 +38,10 @@ function App() {
   }
   const onSubmit = e => {
     e.preventDefault()
+    const logginInData = {
+      username: loginFormValues.username,
+      password: loginFormValues.password,
+    }
   }
 
   return (
