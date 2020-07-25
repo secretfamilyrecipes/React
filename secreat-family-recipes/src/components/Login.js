@@ -1,6 +1,12 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const styles = styled.div`
+
+`
+
 export default function Login({ loginFormValues, handleChange, onSubmit, loginErrorMessages }) {
 
 

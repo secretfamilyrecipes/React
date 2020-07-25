@@ -31,18 +31,18 @@ function App() {
       : setLoginFormValues({ ...loginFormValues, [name]: value })
 
     yup
-    //get schema that is store in another file, and find the key that matches name
-    .reach(loginSchema, name)
-    //make sure that the value matches all the conditions of the key
-    .validate(value)
-    //if all conditions matches then don't display any errors
-    .then( () => {
-      setLoginErrorMessages({...loginErrorMessages, [name]: ''})
-    })
-    //if there is some conditions that don't match then save the errors to state loginErrorMessages
-    .catch( err => {
-      setLoginErrorMessages({...loginErrorMessages, [name]: err.errors[0]})
-    })
+      //get schema that is store in another file, and find the key that matches name
+      .reach(loginSchema, name)
+      //make sure that the value matches all the conditions of the key
+      .validate(value)
+      //if all conditions matches then don't display any errors
+      .then(() => {
+        setLoginErrorMessages({ ...loginErrorMessages, [name]: '' })
+      })
+      //if there is some conditions that don't match then save the errors to state loginErrorMessages
+      .catch(err => {
+        setLoginErrorMessages({ ...loginErrorMessages, [name]: err.errors[0] })
+      })
   }
   const onSubmit = e => {
     e.preventDefault()
