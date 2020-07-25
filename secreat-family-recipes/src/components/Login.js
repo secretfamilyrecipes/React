@@ -1,35 +1,41 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 
-const Login = () => (
-  <Segment placeholder>
-    <Grid columns={2} relaxed='very' stackable>
-      <Grid.Column>
-        <Form>
-          <Form.Input
-            icon='user'
-            iconPosition='left'
-            label='Username'
-            placeholder='Username'
-          />
-          <Form.Input
-            icon='lock'
-            iconPosition='left'
-            label='Password'
-            type='password'
-          />
+export default function Login() {
+  //event gabdkers
+  // const onInputChange = e => {
+  //   const { name, value } = e.target
+  // }
 
-          <Button content='Login' primary />
-        </Form>
-      </Grid.Column>
+  return (
+    <Segment placeholder>
+      <Grid columns={2} relaxed='very' stackable>
+        <Grid.Column>
+          <Form>
+            <Form.Input
+              icon='user'
+              iconPosition='left'
+              label='Username'
+              placeholder='Username'
+            />
+            <Form.Input
+              icon='lock'
+              iconPosition='left'
+              label='Password'
+              type='password'
+            />
 
-      <Grid.Column verticalAlign='middle'>
-        <Button content='Sign up' icon='signup' size='big' />
-      </Grid.Column>
-    </Grid>
+            <Button content='Login' primary />
+          </Form>
+        </Grid.Column>
 
-    <Divider vertical>Or</Divider>
-  </Segment>
-)
+        <Grid.Column verticalAlign='middle'>
+          <Button content='Sign up' icon='signup' size='big' />
+        </Grid.Column>
+      </Grid>
 
-export default Login
+      <Divider vertical>Or</Divider>
+    </Segment>
+  )
+}
+

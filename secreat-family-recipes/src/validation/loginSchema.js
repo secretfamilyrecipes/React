@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-const formSchema = yup.object().shape({
+const loginchema = yup.object().shape({
   username: yup
     .string()
     .min(3, "First Name must be at least 3 characters")
