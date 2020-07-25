@@ -27,7 +27,18 @@ function App() {
 
   //post form values
 
-
+  //event handlers
+  const handleChange = e => {
+    //update form values state to the current inputed values
+    e.persist()
+    const { name, checked, value } = e.target
+    e.target.tye === 'checkbox'
+      ? setLoginFormValues({ ...loginFormValues, [name]: checked })
+      : setLoginFormValues({ ...loginFormValues, [name]: value })
+  }
+  const onSubmit = e => {
+    e.preventDefault()
+  }
 
   return (
     <div className="App">
@@ -35,7 +46,7 @@ function App() {
 
       <Switch>
         <Route path='/login'>
-          <Login loginFormValues={loginFormValues} setLoginFormValues = {setLoginFormValues} loginErrorMessages={loginErrorMessages}/>
+          <Login loginFormValues={loginFormValues} handleChange={handleChange} onSubmit={onSubmit} />
         </Route>
       </Switch>
     </div>

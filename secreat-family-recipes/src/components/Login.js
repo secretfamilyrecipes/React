@@ -1,29 +1,27 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 
-export default function Login({ loginFormValues, setLoginFormValues, loginErrorMessages }) {
-  //event gabdkers
-  const handleChange = e => {
-    //update form values state to the current inputed values
-    e.persist()
-    const {name, checked, value} = e.target
-    e.target.tye === 'checkbox'
-      ? setLoginFormValues({ ...loginFormValues, [name]: checked})
-      : setLoginFormValues({ ...loginFormValues, [name]: value})
-  }
+export default function Login({ loginFormValues, handleChange, onSubmit }) {
+ 
 
   return (
     <Segment placeholder>
       <Grid columns={2} relaxed='very' stackable>
         <Grid.Column>
-          <Form>
+          <Form onSubmit={onSubmit}>
             <Form.Input
+              name='username'
+              value={loginFormValues.username}
+              onChange={handleChange}
               icon='user'
               iconPosition='left'
               label='Username'
               placeholder='Username'
             />
             <Form.Input
+              name='password'
+              value={loginFormValues.password}
+              onChange={handleChange}
               icon='lock'
               iconPosition='left'
               label='Password'
