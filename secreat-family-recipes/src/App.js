@@ -21,12 +21,6 @@ function App() {
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues)
   const [loginErrorMessages, setLoginErrorMessages] = useState(defaultLoginErrorMessages)
 
-  //form validation
-
-  //Update form values on form change
-
-  //post form values
-
   //event handlers
   const handleChange = e => {
     //update form values state to the current inputed values
@@ -42,6 +36,7 @@ function App() {
       username: loginFormValues.username,
       password: loginFormValues.password,
     }
+    //this data needs be check with the back-end
   }
 
   return (
