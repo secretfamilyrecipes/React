@@ -18,9 +18,32 @@ const defaultLoginErrorMessages = {
   password: '',
 }
 
+//initial sign up form values and errors messages
+const initalSignUpValues = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  email: '',
+  password: ''
+}
+const initalSignUpErrorMessages = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  email: '',
+  password: ''
+}
+
 function App() {
   const history = useHistory()
   const futurePageAfterLogingIn = '/home'
+  const noCurrentForm = ''
+  const [inCurrentForm, setInCurrentForm] = useState(noCurrentForm)
+
+  //sign up states
+  const [signUpFormValues, setSignUpFormValues] = useState(initalSignUpValues)
+  const [signUpErrorMessages, setSignUpErrorMessages] = useState(initalSignUpErrorMessages)
+
   //form values states
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues)
   const [loginErrorMessages, setLoginErrorMessages] = useState(defaultLoginErrorMessages)
@@ -46,7 +69,22 @@ function App() {
       //if there is some conditions that don't match then save the errors to state loginErrorMessages
       .catch(err => {
         setLoginErrorMessages({ ...loginErrorMessages, [name]: err.errors[0] })
+        debugger
+        switch(inCurrentForm){
+          case 'Login':
+            console.log('Login case')
+            break
+          case 'SignUpForm':
+            console.log('signUpForm case')
+            break
+          default:
+            console.log('default case')
+        }
+        setInCurrentForm(noCurrentForm)    
+
       })
+
+      
   }
   const onSubmit = e => {
     e.preventDefault()
@@ -77,6 +115,7 @@ function App() {
             handleChange={handleChange}
             onSubmit={onSubmit}
             loginErrorMessages={loginErrorMessages}
+            setInCurrentForm={setInCurrentForm}
           />
         </Route>
         <Route path='/success-login' >
@@ -84,7 +123,7 @@ function App() {
         </Route>
         <Route path='/sign-up'>
           <CreateNewUser
-          
+          setInCurrentForm={setInCurrentForm}
           
           />
         </Route>
