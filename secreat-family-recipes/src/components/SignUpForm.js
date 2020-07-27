@@ -1,37 +1,53 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 
-export default function SignUpForm({setInCurrentForm}) {
-  setInCurrentForm('SignUpForm')
+export default function SignUpForm({ changeInCurrentForm, signUpErrorMessages, signUpFormValues, handleChange, onSubmit }) {
+  changeInCurrentForm('SignUpForm')
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Form.Group unstackable widths={2}>
         <Form.Input
           name='firstName'
-          
+          value={signUpFormValues.firstName}
+          onChange={handleChange}
           label='First name'
           placeholder='First name'
         />
         <Form.Input
+          name='lastName'
+          value={signUpFormValues.lastName}
+          onChange={handleChange}
           label='Last name'
           placeholder='Last name'
         />
         <Form.Input
+          name='username'
+          value={signUpFormValues.username}
+          onChange={handleChange}
           label='Username'
           placeholder='Username'
-        />w
+        />
       </Form.Group>
       <Form.Group widths={2}>
         <Form.Input
+          name='email'
+          value={signUpFormValues.email}
+          onChange={handleChange}
           label='Email'
           placeholder='Email'
         />
         <Form.Input
+          name='password'
+          value={signUpFormValues.password}
+          onChange={handleChange}
           label='Password'
           placeholder='Password'
         />
       </Form.Group>
       <Form.Checkbox
+        name='termAndConditions'
+        value={signUpFormValues.termAndConditions}
+        onChange={handleChange}
         label='I agree to the Terms and Conditions'
       />
       <Button type='submit'>Submit</Button>

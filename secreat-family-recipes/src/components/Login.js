@@ -14,8 +14,9 @@ const Styles = styled.div`
   }
 `
 
-export default function Login({ loginFormValues, handleChange, onSubmit, loginErrorMessages, setInCurrentForm }) {
-  setInCurrentForm('Login')
+export default function Login({ loginFormValues, handleChange, onSubmit, loginErrorMessages, changeInCurrentForm }) {
+  changeInCurrentForm('Login')
+  
   return (
     <Styles>
       <Segment placeholder>
