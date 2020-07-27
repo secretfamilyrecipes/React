@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 //components
 import Login from './components/Login'
 import loginSchema from './validation/loginSchema'
-
+import LoginSuccessful from './components/LoginSuccessful'
 //Login initial values and errors
 const initialLoginValues = {
   username: '',
@@ -17,6 +17,8 @@ const defaultLoginErrorMessages = {
 }
 
 function App() {
+  const history = useHistory()
+  const futurePageAfterLogingIn = '/home'
   //form values states
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues)
   const [loginErrorMessages, setLoginErrorMessages] = useState(defaultLoginErrorMessages)
@@ -53,6 +55,9 @@ function App() {
     //reset login form
     setLoginFormValues(initialLoginValues)
 
+    //show success login page 
+    history.push('/success-login')
+    setTimeout(()=> {history.push(futurePageAfterLogingIn)},3000)
     //this data needs be check with the back-end
   }
 
@@ -68,6 +73,9 @@ function App() {
             onSubmit={onSubmit}
             loginErrorMessages={loginErrorMessages}
           />
+        </Route>
+        <Route path='/success-login' >
+          <LoginSuccessful/>
         </Route>
       </Switch>
     </div>
