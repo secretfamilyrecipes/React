@@ -6,6 +6,8 @@ import * as yup from 'yup'
 import Login from './components/Login'
 import loginSchema from './validation/loginSchema'
 import LoginSuccessful from './components/LoginSuccessful'
+import CreateNewUser from './components/CreateNewUser'
+
 //Login initial values and errors
 const initialLoginValues = {
   username: '',
@@ -55,15 +57,18 @@ function App() {
     //reset login form
     setLoginFormValues(initialLoginValues)
 
+
+    //this data needs be check with the back-end
+  }
+  function showSuccessLoginPage() {
     //show success login page 
     history.push('/success-login')
-    setTimeout(()=> {history.push(futurePageAfterLogingIn)},3000)
-    //this data needs be check with the back-end
+    setTimeout(() => { history.push(futurePageAfterLogingIn) }, 3000)
   }
 
   return (
     <div className="App">
-      Hello World
+      App.js file
 
       <Switch>
         <Route path='/login'>
@@ -75,7 +80,13 @@ function App() {
           />
         </Route>
         <Route path='/success-login' >
-          <LoginSuccessful/>
+          <LoginSuccessful />
+        </Route>
+        <Route path='/sign-up'>
+          <CreateNewUser
+          
+          
+          />
         </Route>
       </Switch>
     </div>

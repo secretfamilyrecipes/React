@@ -57,7 +57,7 @@ export default function Login({ loginFormValues, handleChange, onSubmit, loginEr
           </Grid.Column>
 
           <Grid.Column verticalAlign='middle'>
-            <Link to='/singup'>
+            <Link to='/sign-up'>
               <Button content='Sign up' icon='signup' size='big' />
             </Link>
           </Grid.Column>
