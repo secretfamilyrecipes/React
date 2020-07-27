@@ -23,7 +23,7 @@ const loginchema = yup.object().shape({
     .required("Email is Required"),
   termAndConditions: yup
     .boolean()
-    .required("Username is Required"),
+    .required("You must agree to the terms and conditions"),
 
 })
 

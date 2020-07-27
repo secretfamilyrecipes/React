@@ -25,7 +25,7 @@ const initalSignUpValues = {
   firstName: '',
   lastName: '',
   email: '',
-  termAndConditions: false,
+  termAndConditions: '',
 }
 const initalSignUpErrorMessages = {
   username: '',
@@ -64,18 +64,17 @@ function App() {
     const isInLoginForm = inCurrentForm === formNamesList.login
     const isInSingUpForm = inCurrentForm === formNamesList.singUpForm
 
-    if(isCheckbox){
-      if(isInLoginForm){
+    if (isCheckbox) {
+      if (isInLoginForm) {
         setLoginFormValues({ ...loginFormValues, [name]: checked })
-      }else if(isInSingUpForm){
+      } else if (isInSingUpForm) {
         setSignUpFormValues({ ...signUpFormValues, [name]: checked })
         console.log('updating sign form' + signUpFormValues)
-
       }
-    }else{//isloging
-      if(isInLoginForm){
+    } else {//isloging
+      if (isInLoginForm) {
         setLoginFormValues({ ...loginFormValues, [name]: value })
-      }else if(isInSingUpForm){
+      } else if (isInSingUpForm) {
         setSignUpFormValues({ ...signUpFormValues, [name]: value })
         console.log('updating sign form' + signUpFormValues)
       }
@@ -88,12 +87,20 @@ function App() {
       .validate(value)
       //if all conditions matches then don't display any errors
       .then(() => {
-
-        setLoginErrorMessages({ ...loginErrorMessages, [name]: '' })
+        if (isInLoginForm) {
+          setLoginErrorMessages({ ...signUpErrorMessages, [name]: '' })
+        } else if (isInSingUpForm) {
+          setSignUpErrorMessages({ ...signUpErrorMessages, [name]: '' })
+        }
       })
       //if there is some conditions that don't match then save the errors to state loginErrorMessages
       .catch(err => {
-        setLoginErrorMessages({ ...loginErrorMessages, [name]: err.errors[0] })
+        if (isInLoginForm) {
+          setLoginErrorMessages({ ...signUpErrorMessages, [name]: err.errors[0] })
+        } else if (isInSingUpForm) {
+          setSignUpErrorMessages({ ...signUpErrorMessages, [name]: err.errors[0] })
+          debugger
+        }
       })
 
 

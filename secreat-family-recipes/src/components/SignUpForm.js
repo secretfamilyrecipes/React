@@ -4,7 +4,7 @@ import { Button, Form } from 'semantic-ui-react'
 export default function SignUpForm({ changeInCurrentForm, signUpErrorMessages, signUpFormValues, handleChange, onSubmit }) {
   changeInCurrentForm('SignUpForm')
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} error>
       <Form.Group unstackable widths={2}>
         <Form.Input
           name='firstName'
@@ -49,6 +49,7 @@ export default function SignUpForm({ changeInCurrentForm, signUpErrorMessages, s
         value={signUpFormValues.termAndConditions}
         onChange={handleChange}
         label='I agree to the Terms and Conditions'
+        
       />
       <Button type='submit'>Submit</Button>
     </Form>
