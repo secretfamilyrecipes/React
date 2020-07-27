@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import Login from './components/Login'
 import loginSchema from './validation/loginSchema'
 import LoginSuccessful from './components/LoginSuccessful'
-import CreateNewUser from './components/CreateNewUser'
+import CreateNewUser from './components/SignUpForm'
 
 //Login initial values and errors
 const initialLoginValues = {
