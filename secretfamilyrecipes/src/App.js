@@ -13,8 +13,8 @@ const initialLoginFormValues = {
   password: "",
 };
 const initialRegisterFormValues = {
-  fname: "",
-  lname: "",
+  // fname: "",
+  // lname: "",
   username: "",
   email: "",
   password: "",
@@ -23,8 +23,10 @@ const initialRegisterFormValues = {
 const registerErrorValues = {
   username: "",
   password: "",
+  email: "",
 };
 const initialUsers = [];
+const initialDisabled = true;
 
 function App() {
   const [loginFormValues, setLoginFormValues] = useState(
@@ -35,6 +37,7 @@ function App() {
   );
   const [registerFormErrors, setFormErrors] = useState(registerErrorValues);
   const [users, setUsers] = useState(initialUsers);
+  const [disabled, setDisabled] = useState(initialDisabled);
 
   const postNewUser = (newUser) => {
     axios
@@ -73,26 +76,33 @@ function App() {
     };
     postNewUser(newUser);
   };
+  useEffect(() => {
+    formSchema.isValid(registerFormValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [registerFormValues]);
   return (
     <div className="App">
-      <Route exact path="/">
+      <Route exact path="/login">
         <Login />
         <p>
-          Don't have an account? <Link to="/register">Click here</Link> to
-          create a new account.
+          Don't have an account? <Link to="/">Click here</Link> to create a new
+          account.
         </p>
       </Route>
 
-      <Route exact path="/register">
+      <Route exact path="/">
         <Register
           registerFormErrors={registerFormErrors}
           registerFormValues={registerFormValues}
           inputChange={inputChange}
           checkboxChange={checkboxChange}
           submit={submit}
+          disabled={disabled}
         />
         <p>
-          Already have an account? <Link to="/">Click here</Link> to sign in.
+          Already have an account? <Link to="/login">Click here</Link> to sign
+          in.
         </p>
       </Route>
     </div>

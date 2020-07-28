@@ -7,6 +7,7 @@ export default function Register(props) {
     inputChange,
     checkboxChange,
     submit,
+    disabled,
   } = props;
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -22,7 +23,7 @@ export default function Register(props) {
   };
   return (
     <form onSubmit={onSubmit}>
-      <label htmlFor="fname">
+      {/* <label htmlFor="fname">
         First name:
         <input
           id="fname"
@@ -43,7 +44,7 @@ export default function Register(props) {
           type="text"
           placeholder="Last name"
         />
-      </label>
+      </label> */}
       <label htmlFor="username">
         Username:
         <input
@@ -86,7 +87,7 @@ export default function Register(props) {
           onChange={onCheckboxChange}
         />
       </label>
-      <button>Create Account</button>
+      <button disabled={disabled}>Create Account</button>
       <div className="errors">
         <div>{registerFormErrors.username}</div>
         <div>{registerFormErrors.email}</div>
