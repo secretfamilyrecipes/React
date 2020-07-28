@@ -1,3 +1,5 @@
+import {v4 as uuid} from 'uuid';
+
 export const dummydata = [
     {
         title: 'Salmon with Chive Sauce',
@@ -24,7 +26,8 @@ export const dummydata = [
             'Place salmon on grill over hot coals or rack of broiler pan',
             'Grill covered or broil 5-8 mins on each side or until fish flakes easily with fork',
             'Serve with reserved salad dressing mix'
-        ]
+        ],
+        id: uuid()
     },
     {
         title: 'Tinted Frosting',
@@ -41,6 +44,7 @@ export const dummydata = [
             'In a small bowl, mix sugar, butter, and 1 tbs milk and a few drops of food color',
             'Add more milk if necessary to make frosting more spreadable',
             'Add more sugar if it becomes too runny'
-        ]
+        ],
+        id: uuid()
     }
 ]
