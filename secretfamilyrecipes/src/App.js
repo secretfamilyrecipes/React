@@ -101,7 +101,7 @@ function App() {
         </p>
       </Route>
       <RecipesContext.Provider value={{data}}>
-        <Route exact path='/protected'>
+        <Route exact path='/recipes'>
           <Recipes/>
         </Route>
       </RecipesContext.Provider>

@@ -9,7 +9,7 @@ const Recipes = () =>{
             {data.length > 0 && (
                 <div>
                     {data.map(recipes =>(
-                        <div>
+                        <div key={recipes.id}>
                             <h3>Title:&nbsp;{recipes.title}</h3>
                             <p>Source:&nbsp;{recipes.source}</p>
                             {recipes.preptime + recipes.cooktime > 0 && (
