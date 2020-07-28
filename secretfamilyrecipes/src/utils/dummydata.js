@@ -1,9 +1,9 @@
-const dummydata = [
+export const dummydata = [
     {
         title: 'Salmon with Chive Sauce',
         source: 'Favorite Brand Name Cookbook',
-        preptime: '10 mins',
-        cooktime: '16mins',
+        preptime: 10,
+        cooktime: 16,
         ingredients: [
             '1/2 cup MIRACLE WHIP',
             '1/4 cup finely chopped fresh chives',
@@ -29,8 +29,8 @@ const dummydata = [
     {
         title: 'Tinted Frosting',
         source: 'Favorite Brand Name Cookbook',
-        preptime: 'N/A',
-        cooktime: 'N/A',
+        preptime: 0,
+        cooktime: 0,
         ingredients: [
             '1 cup confectioners sugar',
             '2 tbs butter or margarine, softened',

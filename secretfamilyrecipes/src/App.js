@@ -7,6 +7,11 @@ import Login from "./Components/Login";
 import * as yup from "yup";
 import formSchema from "./validation/formSchema";
 import Register from "./Components/Register";
+import {dummydata} from './utils/dummydata';
+import {RecipesContext} from './utils/RecipesContext';
+import Recipes from './Components/RecipesList';
+
+const data = dummydata;
 
 const initialLoginFormValues = {
   username: "",
@@ -95,6 +100,11 @@ function App() {
           Already have an account? <Link to="/">Click here</Link> to sign in.
         </p>
       </Route>
+      <RecipesContext.Provider value={{data}}>
+        <Route exact path='/protected'>
+          <Recipes/>
+        </Route>
+      </RecipesContext.Provider>
     </div>
   );
 }
