@@ -1,15 +1,23 @@
 import React from "react";
 
-export default function Login() {
+export default function Login(props) {
+  const { login, loginSubmit, loginChange } = props;
+  const onLoginChange = (evt) => {
+    const { name, value } = evt.target;
+    loginChange(name, value);
+  };
+
   return (
-    <form>
-      <label htmlFor="username">
-        Username:
+    <form onSubmit={loginSubmit}>
+      <label htmlFor="email">
+        Email:
         <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Username"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={onLoginChange}
+          value={login.email}
         />
       </label>
       <label htmlFor="password">
@@ -19,8 +27,11 @@ export default function Login() {
           name="password"
           type="password"
           placeholder="Password"
+          onChange={onLoginChange}
+          value={login.password}
         />
       </label>
+      <button>Login</button>
     </form>
   );
 }
