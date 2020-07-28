@@ -1,6 +1,8 @@
 import * as yup from "yup";
 
 const formSchema = yup.object().shape({
+  // fname: yup.string(),
+  // lname: yup.string(),
   username: yup
     .string()
     .min(5, "Username must be at least 5 characters")
