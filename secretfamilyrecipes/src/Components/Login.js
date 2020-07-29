@@ -8,30 +8,35 @@ export default function Login(props) {
   };
 
   return (
-    <form onSubmit={loginSubmit}>
-      <label htmlFor="email">
-        Email:
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={onLoginChange}
-          value={login.email}
-        />
-      </label>
-      <label htmlFor="password">
-        Password:
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={onLoginChange}
-          value={login.password}
-        />
-      </label>
-      <button>Login</button>
-    </form>
+    <div className="formContainer">
+      <h1>Login</h1>
+      <form onSubmit={loginSubmit}>
+        <label htmlFor="email">
+          Email:{" "}
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            onChange={onLoginChange}
+            value={login.email}
+          />
+        </label>
+        <br />
+        <label htmlFor="password">
+          Password:{" "}
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={onLoginChange}
+            value={login.password}
+          />
+        </label>
+        <br />
+        <button>Login</button>
+      </form>
+    </div>
   );
 }

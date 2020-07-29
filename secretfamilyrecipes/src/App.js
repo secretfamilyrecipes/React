@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import axios from "axios";
 import { Link, Route } from "react-router-dom";
-// import "./App.css";
+import "./App.css";
 import Login from "./Components/Login";
 import * as yup from "yup";
 import formSchema from "./validation/formSchema";
 import Register from "./Components/Register";
-import {dummydata} from './utils/dummydata';
-import {RecipesContext} from './utils/RecipesContext';
-import Recipes from './Components/RecipesList';
+import { dummydata } from "./utils/dummydata";
+import { RecipesContext } from "./utils/RecipesContext";
+import Recipes from "./Components/RecipesList";
+import styled from "styled-components";
 
 const data = dummydata;
+const AppStyle = styled.div`
+  text-align: center;
+  background: #dfce9d;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    background: #1799b5;
+    padding: 1% 0;
+    border-radius: 10px;
+    h1 {
+      font-family: Akronim;
+    }
+  }
+`;
 
 const initialLoginFormValues = {
   email: "",
@@ -103,7 +120,7 @@ function App() {
     });
   }, [registerFormValues]);
   return (
-    <div className="App">
+    <AppStyle className="App">
       <Route exact path="/login">
         <Login
           login={login}
@@ -130,12 +147,12 @@ function App() {
           in.
         </p>
       </Route>
-      <RecipesContext.Provider value={{data}}>
-        <Route exact path='/recipes'>
-          <Recipes/>
+      <RecipesContext.Provider value={{ data }}>
+        <Route exact path="/recipes">
+          <Recipes />
         </Route>
       </RecipesContext.Provider>
-    </div>
+    </AppStyle>
   );
 }
 
