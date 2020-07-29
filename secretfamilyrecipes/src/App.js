@@ -10,6 +10,7 @@ import Register from "./Components/Register";
 import {dummydata} from './utils/dummydata';
 import {RecipesContext} from './utils/RecipesContext';
 import Recipes from './Components/RecipesList';
+import Recipe from './Components/Recipe';
 
 const data = dummydata;
 
@@ -216,7 +217,7 @@ function App() {
         </Route>
       </RecipesContext.Provider>
       <Recipe 
-        recipeFormErrors={recipeFormErrors}
+        recipeFormErrors={recipeErrorValues}
         recipeFormValues={recipeFormValues}
         validateRecipe={validateRecipe}
         submit={submit}
