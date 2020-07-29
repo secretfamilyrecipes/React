@@ -50,7 +50,7 @@ const initialUsers = [];
 
 const initialRecipes = [];
 
-const formSchema = yup.object().shape({
+const recipeFormSchema = yup.object().shape({
   recipeName: yup
     .string()
     .required("Recipe Name is Required")
@@ -154,7 +154,7 @@ function App() {
 
   const validateRecipe = (e) => {
     yup
-      .reach(formSchema, e.target.name)
+      .reach(recipeFormSchema, e.target.name)
       .validate(e.target.value)
       .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
       .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
