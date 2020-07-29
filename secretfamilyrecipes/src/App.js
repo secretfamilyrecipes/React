@@ -157,10 +157,12 @@ function App() {
       .reach(formSchema, e.target.name)
       .validate(e.target.value)
       .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
-      .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}))
-  }
-  setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
-};
+      .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
+      
+      setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
+  };
+  
+
   const submitNewRecipe = () => {
     const newRecipe = {
       recipeName: recipeFormValues.recipeName.trim(),
@@ -221,6 +223,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
 export default App;
