@@ -30,6 +30,7 @@ const initialRecipeFormValues = {
   recipeSource: "",
   prepTime: "",
   cookTime: "",
+  ingredients: "",
   directions: "",
 };
 const registerErrorValues = {
@@ -41,6 +42,7 @@ const initialRecipeErrorValues ={
   recipeSource: "",
   prepTime: "",
   cookTime: "",
+  ingredients: "",
   directions: "",
 };
 const initialUsers = [];
@@ -134,6 +136,18 @@ function App() {
   }
   setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
 };
+  const submitNewRecipe = () => {
+    const newRecipe = {
+      recipeName: recipeFormValues.recipeName.trim(),
+      recipeSource: recipeFormValues.recipeSource.trim(),
+      prepTime: recipeFormValues.prepTime.trim(),
+      cookTime: recipeFormValues.cookTime.trim(),
+      ingredients: recipeFormValues.ingredients.trim(),
+      directions: recipeFormValues.directions.trim(),
+    }
+    postNewRecipe(newRecipe)
+  }
+
   return (
     <div className="App">
       <Route exact path="/">
@@ -165,7 +179,6 @@ function App() {
         recipeFormErrors={recipeFormErrors}
         recipeFormValues={recipeFormValues}
         validateRecipe={validateRecipe}
-        setRecipeFormValues={setRecipeFormValues}
         submit={submit}
       />
     </div>

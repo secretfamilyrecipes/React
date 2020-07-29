@@ -50,28 +50,28 @@ export default function Register(props) {
           placeholder="Prep Time"
         />
       </label>
-      <label htmlFor="cookTime">
-        Cooking Time:
+      <label htmlFor="ingredients">
+        Ingredients:
         <input
-          id="cookTime"
-          name="cookTime"
-          value={recipeFormValues.cookTime}
+          id="ingredients"
+          name="ingredients"
+          value={recipeFormValues.ingredients}
           onChange={onInputChange}
-          type="cookTime"
-          placeholder="Cooking Time"
+          type="text"
+          placeholder="Ingredients"
         />
       </label>
-      {/* <label htmlFor="password">
-        Password:
+      <label htmlFor="directions">
+        Directions:
         <input
-          id="password"
-          name="password"
-          value={recipeFormValues.password}
+          id="directions"
+          name="directions"
+          value={recipeFormValues.directions}
           onChange={onInputChange}
-          type="password"
-          placeholder="Password"
+          type="text"
+          placeholder="Directions"
         />
-      </label> */}
+      </label>
 
       <button> Add Recipe </button>
       <div className="errors">
@@ -79,6 +79,8 @@ export default function Register(props) {
         <div>{recipeFormErrors.recipeSource}</div>
         <div>{recipeFormErrors.prepTime}</div>
         <div>{recipeFormErrors.cookTime}</div>
+        <div>{recipeFormErrors.ingredients}</div>
+        <div>{recipeFormErrors.directions}</div>
       </div>
     </form>
   );
