@@ -1,18 +1,56 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import axios from "axios";
 import { Link, Route } from "react-router-dom";
-// import "./App.css";
+import "./App.css";
 import Login from "./Components/Login";
 import * as yup from "yup";
 import formSchema from "./validation/formSchema";
 import Register from "./Components/Register";
+import styled from "styled-components";
 import {dummydata} from './utils/dummydata';
 import {RecipesContext} from './utils/RecipesContext';
 import Recipes from './Components/RecipesList';
 import Recipe from './Components/Recipe';
 
 const data = dummydata;
+const AppStyle = styled.div`
+  text-align: center;
+  /* background: #dfce9d; */
+  .afterForm {
+    font-size: 3rem;
+  }
+  .formContainer {
+    h1 {
+      font-size: 7rem;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    background: #1799b5;
+    padding: 1% 0;
+    border-radius: 10px;
+    .errors {
+      color: white;
+    }
+    input {
+      height: 4vh;
+      background: black;
+      color: white;
+    }
+    span {
+      font-size: 3rem;
+      color: white;
+    }
+  }
+  .clickHere {
+    display: inline;
+    text-decoration: none;
+  }
+`;
 
 const initialLoginFormValues = {
   email: "",
@@ -184,16 +222,19 @@ function App() {
   }, [registerFormValues]);
 
   return (
-    <div className="App">
+    <AppStyle className="App">
       <Route exact path="/login">
         <Login
           login={login}
           loginSubmit={loginSubmit}
           loginChange={loginChange}
         />
-        <p>
-          Don't have an account? <Link to="/">Click here</Link> to create a new
-          account.
+        <p className="afterForm">
+          Don't have an account?{" "}
+          <Link to="/" className="clickHere">
+            Click here
+          </Link>{" "}
+          to create a new account.
         </p>
       </Route>
 
@@ -206,14 +247,17 @@ function App() {
           submit={submit}
           disabled={disabled}
         />
-        <p>
-          Already have an account? <Link to="/login">Click here</Link> to sign
-          in.
+        <p className="afterForm">
+          Already have an account?{" "}
+          <Link to="/login" className="clickHere">
+            Click here
+          </Link>{" "}
+          to sign in.
         </p>
       </Route>
-      <RecipesContext.Provider value={{data}}>
-        <Route exact path='/recipes'>
-          <Recipes/>
+      <RecipesContext.Provider value={{ data }}>
+        <Route exact path="/recipes">
+          <Recipes />
         </Route>
       </RecipesContext.Provider>
       <Recipe 
@@ -222,7 +266,7 @@ function App() {
         validateRecipe={validateRecipe}
         submit={submit}
       />
-    </div>
+    </AppStyle>
   );
 };
 
