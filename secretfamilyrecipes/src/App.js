@@ -14,12 +14,12 @@ import Recipes from './Components/RecipesList';
 const data = dummydata;
 
 const initialLoginFormValues = {
-  username: "",
+  email: "",
   password: "",
 };
 const initialRegisterFormValues = {
-  fname: "",
-  lname: "",
+  // fname: "",
+  // lname: "",
   username: "",
   email: "",
   password: "",
@@ -36,6 +36,7 @@ const initialRecipeFormValues = {
 const registerErrorValues = {
   username: "",
   password: "",
+  email: "",
 };
 const initialRecipeErrorValues ={
   recipeName: "",
@@ -46,6 +47,7 @@ const initialRecipeErrorValues ={
   directions: "",
 };
 const initialUsers = [];
+
 const initialRecipes = [];
 
 const formSchema = yup.object().shape({
@@ -65,15 +67,20 @@ const formSchema = yup.object().shape({
   //   .min(2, "Must be at least 2 characters long"),
 });
 
+const initialDisabled = true;
+
+
 function App() {
-  const [loginFormValues, setLoginFormValues] = useState(
-    initialLoginFormValues
-  );
+  // const [loginFormValues, setLoginFormValues] = useState(
+  //   initialLoginFormValues
+  // );
   const [registerFormValues, setRegisterFormValues] = useState(
     initialRegisterFormValues
   );
   const [registerFormErrors, setFormErrors] = useState(registerErrorValues);
   const [users, setUsers] = useState(initialUsers);
+  const [disabled, setDisabled] = useState(initialDisabled);
+  const [login, setLogin] = useState(initialLoginFormValues);
 
   const [recipeFormValues, setRecipeFormValues] = useState(initialRecipeFormValues);
   const [recipeErrorValues, setRecipeErrorValues] = useState(initialRecipeErrorValues);
@@ -90,6 +97,7 @@ function App() {
         console.log(err);
       });
   };
+  
   const postNewRecipe = (newRecipe) => {
     axios
       .post("noidea", newRecipe)
@@ -100,6 +108,19 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const loginSubmit = (evt) => {
+    evt.preventDefault();
+    axios
+      .post("https://reqres.in/api/users", login)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    submit();
   };
   const inputChange = (name, value) => {
     yup
@@ -116,10 +137,13 @@ function App() {
   const checkboxChange = (name, isChecked) => {
     setRegisterFormValues({ ...registerFormValues, [name]: isChecked });
   };
+  const loginChange = (name, value) => {
+    setLogin({ ...login, [name]: value });
+  };
   const submit = () => {
     const newUser = {
-      fname: registerFormValues.fname.trim(),
-      lname: registerFormValues.lname.trim(),
+      // fname: registerFormValues.fname.trim(),
+      // lname: registerFormValues.lname.trim(),
       username: registerFormValues.username.trim(),
       email: registerFormValues.email.trim(),
       password: registerFormValues.password,
@@ -127,6 +151,7 @@ function App() {
     };
     postNewUser(newUser);
   };
+
   const validateRecipe = (e) => {
     yup
       .reach(formSchema, e.target.name)
@@ -148,26 +173,39 @@ function App() {
     postNewRecipe(newRecipe)
   }
 
+
+  useEffect(() => {
+    formSchema.isValid(registerFormValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [registerFormValues]);
+
   return (
     <div className="App">
-      <Route exact path="/">
-        <Login />
+      <Route exact path="/login">
+        <Login
+          login={login}
+          loginSubmit={loginSubmit}
+          loginChange={loginChange}
+        />
         <p>
-          Don't have an account? <Link to="/register">Click here</Link> to
-          create a new account.
+          Don't have an account? <Link to="/">Click here</Link> to create a new
+          account.
         </p>
       </Route>
 
-      <Route exact path="/register">
+      <Route exact path="/">
         <Register
           registerFormErrors={registerFormErrors}
           registerFormValues={registerFormValues}
           inputChange={inputChange}
           checkboxChange={checkboxChange}
           submit={submit}
+          disabled={disabled}
         />
         <p>
-          Already have an account? <Link to="/">Click here</Link> to sign in.
+          Already have an account? <Link to="/login">Click here</Link> to sign
+          in.
         </p>
       </Route>
       <RecipesContext.Provider value={{data}}>

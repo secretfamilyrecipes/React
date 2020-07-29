@@ -1,4 +1,16 @@
 import React from "react";
+import styled from "styled-components";
+
+const FormStyle = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  label {
+    input {
+      margin: 0 0 1% 1%;
+    }
+  }
+`;
 
 export default function Register(props) {
   const {
@@ -7,6 +19,7 @@ export default function Register(props) {
     inputChange,
     checkboxChange,
     submit,
+    disabled,
   } = props;
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -21,8 +34,8 @@ export default function Register(props) {
     inputChange(name, value);
   };
   return (
-    <form onSubmit={onSubmit}>
-      <label htmlFor="fname">
+    <FormStyle onSubmit={onSubmit}>
+      {/* <label htmlFor="fname">
         First name:
         <input
           id="fname"
@@ -43,7 +56,7 @@ export default function Register(props) {
           type="text"
           placeholder="Last name"
         />
-      </label>
+      </label> */}
       <label htmlFor="username">
         Username:
         <input
@@ -55,6 +68,7 @@ export default function Register(props) {
           placeholder="Username"
         />
       </label>
+      <br />
       <label htmlFor="email">
         Email:
         <input
@@ -66,6 +80,7 @@ export default function Register(props) {
           placeholder="Email"
         />
       </label>
+      <br />
       <label htmlFor="password">
         Password:
         <input
@@ -77,22 +92,25 @@ export default function Register(props) {
           placeholder="Password"
         />
       </label>
+      <br />
       <label>
         I agree to the Terms and Conditions
         <input
+          id="tos"
           name="termsOfService"
           type="checkbox"
           checked={registerFormValues.termsOfService === true}
           onChange={onCheckboxChange}
         />
       </label>
-      <button>Create Account</button>
+      <br />
+      <button disabled={disabled}>Create Account</button>
       <div className="errors">
         <div>{registerFormErrors.username}</div>
         <div>{registerFormErrors.email}</div>
         <div>{registerFormErrors.password}</div>
         <div>{registerFormErrors.termsOfService}</div>
       </div>
-    </form>
+    </FormStyle>
   );
 }
