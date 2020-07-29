@@ -10,6 +10,7 @@ import Register from "./Components/Register";
 import {dummydata} from './utils/dummydata';
 import {RecipesContext} from './utils/RecipesContext';
 import Recipes from './Components/RecipesList';
+import Recipe from './Components/Recipe';
 
 const data = dummydata;
 
@@ -50,7 +51,7 @@ const initialUsers = [];
 
 const initialRecipes = [];
 
-const formSchema = yup.object().shape({
+const recipeFormSchema = yup.object().shape({
   recipeName: yup
     .string()
     .required("Recipe Name is Required")
@@ -154,7 +155,7 @@ function App() {
 
   const validateRecipe = (e) => {
     yup
-      .reach(formSchema, e.target.name)
+      .reach(recipeFormSchema, e.target.name)
       .validate(e.target.value)
       .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
       .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
@@ -216,7 +217,7 @@ function App() {
         </Route>
       </RecipesContext.Provider>
       <Recipe 
-        recipeFormErrors={recipeFormErrors}
+        recipeFormErrors={recipeErrorValues}
         recipeFormValues={recipeFormValues}
         validateRecipe={validateRecipe}
         submit={submit}
