@@ -14,7 +14,15 @@ import styled from "styled-components";
 const data = dummydata;
 const AppStyle = styled.div`
   text-align: center;
-  background: #dfce9d;
+  /* background: #dfce9d; */
+  .afterForm {
+    font-size: 3rem;
+  }
+  .formContainer {
+    h1 {
+      font-size: 7rem;
+    }
+  }
   form {
     display: flex;
     flex-direction: column;
@@ -24,9 +32,22 @@ const AppStyle = styled.div`
     background: #1799b5;
     padding: 1% 0;
     border-radius: 10px;
-    h1 {
-      font-family: Akronim;
+    .errors {
+      color: white;
     }
+    input {
+      height: 4vh;
+      background: black;
+      color: white;
+    }
+    span {
+      font-size: 3rem;
+      color: white;
+    }
+  }
+  .clickHere {
+    display: inline;
+    text-decoration: none;
   }
 `;
 
@@ -127,9 +148,12 @@ function App() {
           loginSubmit={loginSubmit}
           loginChange={loginChange}
         />
-        <p>
-          Don't have an account? <Link to="/">Click here</Link> to create a new
-          account.
+        <p className="afterForm">
+          Don't have an account?{" "}
+          <Link to="/" className="clickHere">
+            Click here
+          </Link>{" "}
+          to create a new account.
         </p>
       </Route>
 
@@ -142,9 +166,12 @@ function App() {
           submit={submit}
           disabled={disabled}
         />
-        <p>
-          Already have an account? <Link to="/login">Click here</Link> to sign
-          in.
+        <p className="afterForm">
+          Already have an account?{" "}
+          <Link to="/login" className="clickHere">
+            Click here
+          </Link>{" "}
+          to sign in.
         </p>
       </Route>
       <RecipesContext.Provider value={{ data }}>

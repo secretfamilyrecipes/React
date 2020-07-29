@@ -57,7 +57,7 @@ export default function Register(props) {
         />
       </label> */}
         <label htmlFor="username">
-          Username:{" "}
+          <span>Username: </span>
           <input
             id="username"
             name="username"
@@ -69,7 +69,7 @@ export default function Register(props) {
         </label>
         <br />
         <label htmlFor="email">
-          Email:{" "}
+          <span>Email: </span>
           <input
             id="email"
             name="email"
@@ -81,7 +81,7 @@ export default function Register(props) {
         </label>
         <br />
         <label htmlFor="password">
-          Password:{" "}
+          <span>Password: </span>
           <input
             id="password"
             name="password"
@@ -93,7 +93,7 @@ export default function Register(props) {
         </label>
         <br />
         <label>
-          I agree to the Terms and Conditions
+          <span>I agree to the Terms and Conditions</span>
           <input
             id="tos"
             name="termsOfService"

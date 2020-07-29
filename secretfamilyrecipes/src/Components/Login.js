@@ -12,7 +12,7 @@ export default function Login(props) {
       <h1>Login</h1>
       <form onSubmit={loginSubmit}>
         <label htmlFor="email">
-          Email:{" "}
+          <span>Email: </span>
           <input
             id="email"
             name="email"
@@ -24,7 +24,7 @@ export default function Login(props) {
         </label>
         <br />
         <label htmlFor="password">
-          Password:{" "}
+          <span>Password: </span>
           <input
             id="password"
             name="password"
