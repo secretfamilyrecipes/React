@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import { Switch, Route, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
+import headerMenu from './components/headerMenu'
+
 //components
 import Login from './components/Login'
 import loginSchema from './validation/loginSchema'
@@ -141,6 +143,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <headerMenu /> */}
       App.js file
 
       <Switch>

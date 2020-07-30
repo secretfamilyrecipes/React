@@ -45,12 +45,12 @@ export default function SignUpForm({ changeInCurrentForm, signUpErrorMessages, s
         />
       </Form.Group>
       <Form.Checkbox
-        name='termAndConditions'
         value={signUpFormValues.termAndConditions}
         onChange={handleChange}
         label='I agree to the Terms and Conditions'
-        
+        name='termAndConditions'
       />
+      
       <Button type='submit'>Submit</Button>
     </Form>
   )
