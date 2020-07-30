@@ -40,9 +40,9 @@ const AppStyle = styled.div`
       color: white;
     }
     input {
-      height: 4vh;
-      background: black;
-      color: white;
+      height: 3vh;
+      /* background: black;
+      color: white; */
     }
     span {
       font-size: 3rem;
@@ -51,6 +51,11 @@ const AppStyle = styled.div`
     label {
       font-size: 3rem;
       color: white;
+    button {
+      padding: 1%;
+      background: #e25822;
+      border-radius: 10px;
+      color: gainsboro;
     }
   }
   .clickHere {
@@ -84,7 +89,7 @@ const registerErrorValues = {
   password: "",
   email: "",
 };
-const initialRecipeErrorValues ={
+const initialRecipeErrorValues = {
   recipeName: "",
   recipeSource: "",
   prepTime: "",
@@ -106,7 +111,7 @@ const recipeFormSchema = yup.object().shape({
     .required("Recipe Source is Required")
     .min(2, "Must be at least 2 characters long"),
   // prepTime: yup
-  //   .string()   
+  //   .string()
   //   .min(2, "Must be at least 2 characters long"),
   // cookTime: yup
   //   .string()
@@ -114,7 +119,6 @@ const recipeFormSchema = yup.object().shape({
 });
 
 const initialDisabled = true;
-
 
 function App() {
   // const [loginFormValues, setLoginFormValues] = useState(
@@ -128,8 +132,12 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [login, setLogin] = useState(initialLoginFormValues);
 
-  const [recipeFormValues, setRecipeFormValues] = useState(initialRecipeFormValues);
-  const [recipeErrorValues, setRecipeErrorValues] = useState(initialRecipeErrorValues);
+  const [recipeFormValues, setRecipeFormValues] = useState(
+    initialRecipeFormValues
+  );
+  const [recipeErrorValues, setRecipeErrorValues] = useState(
+    initialRecipeErrorValues
+  );
   const [recipes, setRecipes] = useState(initialRecipes);
   console.log(recipes);
 
@@ -355,6 +363,6 @@ function App() {
       </Route>
     </AppStyle>
   );
-};
+}
 
 export default App;
