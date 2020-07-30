@@ -9,7 +9,7 @@ import Register from "./Components/Register";
 import styled from "styled-components";
 import { dummydata } from "./utils/dummydata";
 import { RecipesContext } from "./utils/RecipesContext";
-import RecipesList from "./Components/RecipesList";
+import RecipesList from "./Components/DisplayRecipes";
 import RecipeForm from "./Components/RecipeForm";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 import PrivateRoute from "./Components/PrivateRoute";
@@ -364,7 +364,7 @@ function App() {
       {/* recipes-list-royer-adames  */}
       {/* render a list of receipts */}
       <RecipesContext.Provider value={{ recipes }}>
-        {/* <PrivateRoute exact path='/recipes' component={Recipes}/> */}
+        {/* <PrivateRoute exact path='/recipes' component={DisplayRecipes}/> */}
         <Route exact path="/recipes">
           <RecipesList />
         </Route>
