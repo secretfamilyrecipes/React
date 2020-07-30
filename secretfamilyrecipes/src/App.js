@@ -29,10 +29,11 @@ const AppStyle = styled.div`
     flex-direction: column;
     align-items: center;
     width: 70%;
-    margin: 0 auto;
+    margin: 1% auto;
     background: #1799b5;
     padding: 1% 0;
     border-radius: 10px;
+    box-shadow: 10px 10px 5px grey;
     .errors {
       color: white;
     }
@@ -40,6 +41,8 @@ const AppStyle = styled.div`
       height: 3vh;
       /* background: black;
       color: white; */
+      border: 1px solid black;
+      border-radius: 5px;
     }
     span {
       font-size: 3rem;
