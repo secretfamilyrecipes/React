@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {RecipesContext} from '../utils/RecipesContext';
 import {useHistory} from 'react-router-dom';
 
-const Recipes = () =>{
+export default function Recipes (){
     const {recipes} = useContext(RecipesContext);
     const {push} = useHistory();
 
@@ -34,4 +34,3 @@ const Recipes = () =>{
     );
 };
 
-export default Recipes;
