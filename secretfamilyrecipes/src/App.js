@@ -7,10 +7,10 @@ import * as yup from "yup";
 import formSchema from "./validation/formSchema";
 import Register from "./Components/Register";
 import styled from "styled-components";
-import {dummydata} from './utils/dummydata';
-import {RecipesContext} from './utils/RecipesContext';
-import Recipes from './Components/RecipesList';
-import Recipe from './Components/Recipe';
+import { dummydata } from "./utils/dummydata";
+import { RecipesContext } from "./utils/RecipesContext";
+import Recipes from "./Components/RecipesList";
+import Recipe from "./Components/Recipe";
 
 const data = dummydata;
 const AppStyle = styled.div`
@@ -37,13 +37,19 @@ const AppStyle = styled.div`
       color: white;
     }
     input {
-      height: 4vh;
-      background: black;
-      color: white;
+      height: 3vh;
+      /* background: black;
+      color: white; */
     }
     span {
       font-size: 3rem;
       color: white;
+    }
+    button {
+      padding: 1%;
+      background: #e25822;
+      border-radius: 10px;
+      color: gainsboro;
     }
   }
   .clickHere {
@@ -77,7 +83,7 @@ const registerErrorValues = {
   password: "",
   email: "",
 };
-const initialRecipeErrorValues ={
+const initialRecipeErrorValues = {
   recipeName: "",
   recipeSource: "",
   prepTime: "",
@@ -99,7 +105,7 @@ const recipeFormSchema = yup.object().shape({
     .required("Recipe Source is Required")
     .min(2, "Must be at least 2 characters long"),
   // prepTime: yup
-  //   .string()   
+  //   .string()
   //   .min(2, "Must be at least 2 characters long"),
   // cookTime: yup
   //   .string()
@@ -107,7 +113,6 @@ const recipeFormSchema = yup.object().shape({
 });
 
 const initialDisabled = true;
-
 
 function App() {
   // const [loginFormValues, setLoginFormValues] = useState(
@@ -121,8 +126,12 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [login, setLogin] = useState(initialLoginFormValues);
 
-  const [recipeFormValues, setRecipeFormValues] = useState(initialRecipeFormValues);
-  const [recipeErrorValues, setRecipeErrorValues] = useState(initialRecipeErrorValues);
+  const [recipeFormValues, setRecipeFormValues] = useState(
+    initialRecipeFormValues
+  );
+  const [recipeErrorValues, setRecipeErrorValues] = useState(
+    initialRecipeErrorValues
+  );
   const [recipes, setRecipes] = useState(initialRecipes);
 
   const postNewUser = (newUser) => {
@@ -136,7 +145,7 @@ function App() {
         console.log(err);
       });
   };
-  
+
   const postNewRecipe = (newRecipe) => {
     axios
       .post("noidea", newRecipe)
@@ -195,12 +204,21 @@ function App() {
     yup
       .reach(recipeFormSchema, e.target.name)
       .validate(e.target.value)
-      .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
-      .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
-      
-      setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
+      .then(() =>
+        setRecipeErrorValues({ ...recipeErrorValues, [e.target.name]: "" })
+      )
+      .catch((err) =>
+        setRecipeErrorValues({
+          ...recipeErrorValues,
+          [e.target.name]: err.errors[0],
+        })
+      );
+
+    setRecipeFormValues({
+      ...recipeFormValues,
+      [e.target.name]: e.target.value,
+    });
   };
-  
 
   const submitNewRecipe = () => {
     const newRecipe = {
@@ -210,10 +228,9 @@ function App() {
       cookTime: recipeFormValues.cookTime.trim(),
       ingredients: recipeFormValues.ingredients.trim(),
       directions: recipeFormValues.directions.trim(),
-    }
-    postNewRecipe(newRecipe)
-  }
-
+    };
+    postNewRecipe(newRecipe);
+  };
 
   useEffect(() => {
     formSchema.isValid(registerFormValues).then((valid) => {
@@ -260,7 +277,7 @@ function App() {
           <Recipes />
         </Route>
       </RecipesContext.Provider>
-      <Recipe 
+      <Recipe
         recipeFormErrors={recipeErrorValues}
         recipeFormValues={recipeFormValues}
         validateRecipe={validateRecipe}
@@ -268,6 +285,6 @@ function App() {
       />
     </AppStyle>
   );
-};
+}
 
 export default App;
