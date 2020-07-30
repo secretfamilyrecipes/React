@@ -13,8 +13,14 @@ export default function Register(props) {
   const initialIngredients = []
   const [ingredientItems, setIngredientItems] = useState(initialIngredients)
   
-  const addStep = (e) => setInstructionItems([...instructionItems, e.target.value])
-  const addIng = (e) => setIngredientItems([...ingredientItems, e.target.value])
+  const addStep = (e) => {
+    e.preventDefault()
+    setInstructionItems([...instructionItems, e.target.value])
+  }
+  const addIng = (e) => {
+    e.preventDefault()
+    setIngredientItems([...ingredientItems, e.target.value])
+  }
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -84,7 +90,7 @@ export default function Register(props) {
           type="text"
           placeholder="Steps"
         />
-        <button onClick={addStep}>Add Step</button>
+        <button onClick={addStep} >Add Step</button>
       </label>
       <div>
         {instructionItems.map(instruction => (<div>{instruction}</div>))}
