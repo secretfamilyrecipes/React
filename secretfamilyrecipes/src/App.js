@@ -7,13 +7,13 @@ import * as yup from "yup";
 import formSchema from "./validation/formSchema";
 import Register from "./Components/Register";
 import styled from "styled-components";
-import {dummydata} from './utils/dummydata';
-import {RecipesContext} from './utils/RecipesContext';
-import Recipes from './Components/RecipesList';
-import RecipeForm from './Components/RecipeForm';
-import {axiosWithAuth} from './utils/axiosWithAuth';
-import PrivateRoute from './Components/PrivateRoute';
-import {v4 as uuid} from 'uuid';
+import { dummydata } from "./utils/dummydata";
+import { RecipesContext } from "./utils/RecipesContext";
+import Recipes from "./Components/RecipesList";
+import RecipeForm from "./Components/RecipeForm";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
+import PrivateRoute from "./Components/PrivateRoute";
+import { v4 as uuid } from "uuid";
 
 const data = dummydata;
 const AppStyle = styled.div`
@@ -54,6 +54,7 @@ const AppStyle = styled.div`
     label {
       font-size: 3rem;
       color: white;
+    }
     button {
       padding: 1%;
       background: #e25822;
@@ -145,7 +146,7 @@ function App() {
   console.log(recipes);
 
   //Shanon Start
-  const {push} = useHistory();
+  const { push } = useHistory();
   //Shanon End
 
   // Sam Start
@@ -161,7 +162,7 @@ function App() {
   //     });
   // };
   //Sam End
-  
+
   //Micherre Start
   // const postNewRecipe = (newRecipe) => {
   //   axios
@@ -227,7 +228,7 @@ function App() {
   //     .validate(e.target.value)
   //     .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
   //     .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
-      
+
   //     setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
   // };
 
@@ -239,9 +240,9 @@ function App() {
       cookTime: recipeFormValues.cookTime.trim(),
       ingredients: recipeFormValues.ingredients.trim(),
       directions: recipeFormValues.directions.trim(),
-      id: uuid()
-    }
-    postNewRecipe(newRecipe)
+      id: uuid(),
+    };
+    postNewRecipe(newRecipe);
   };
   //Micherre End
 
@@ -254,30 +255,32 @@ function App() {
   //Sam End
 
   //Shanon Start
-  const postNewUser = newUser =>{
-    axiosWithAuth().post('/auth/register', newUser)
-      .then(res =>{
+  const postNewUser = (newUser) => {
+    axiosWithAuth()
+      .post("/auth/register", newUser)
+      .then((res) => {
         console.log(res);
         // setUsers(...users, [res.data]);
         // setRegisterFormValues(initialRegisterFormValues);
         // push('/login');
       })
-      .catch(err =>{
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  const loginSubmit = event =>{
+  const loginSubmit = (event) => {
     event.preventDefault();
-    axiosWithAuth().post('/auth/login', login)
-      .then(res =>{
+    axiosWithAuth()
+      .post("/auth/login", login)
+      .then((res) => {
         console.log(res);
         // localStorage.setItem('token', res.data.payload);
         // push('/recipes');
-      })
+      });
   };
 
-  const postNewRecipe = newRecipe =>{
+  const postNewRecipe = (newRecipe) => {
     // axiosWithAuth().post('/recipes', newRecipe)
     //   .then(res =>{
     //     console.log(res);
@@ -290,26 +293,29 @@ function App() {
     //   });
     setRecipes(...recipes, [newRecipe]);
     setRecipeFormValues(initialRecipeFormValues);
-    push('/recipes');
+    push("/recipes");
   };
 
-  const recipeHandleChange = (name, value) =>{
-    setRecipeFormValues({...recipeFormValues, [name]: value})
+  const recipeHandleChange = (name, value) => {
+    setRecipeFormValues({ ...recipeFormValues, [name]: value });
   };
 
-  const onRecipeSubmit = event =>{
+  const onRecipeSubmit = (event) => {
     event.preventDefault();
 
-    const newRecipe = {...recipeFormValues, id: uuid()};
+    const newRecipe = { ...recipeFormValues, id: uuid() };
     setRecipes([newRecipe, ...recipes]);
     setRecipeFormValues(initialRecipeFormValues);
 
-    push('/recipes')
+    push("/recipes");
   };
 
-  const onRecipeChange = event =>{
-    setRecipeFormValues({...recipeFormValues, [event.target.name]: event.target.value});
-  }
+  const onRecipeChange = (event) => {
+    setRecipeFormValues({
+      ...recipeFormValues,
+      [event.target.name]: event.target.value,
+    });
+  };
   //Shanon End
 
   return (
@@ -348,12 +354,12 @@ function App() {
       </Route>
       <RecipesContext.Provider value={{ recipes }}>
         {/* <PrivateRoute exact path='/recipes' component={Recipes}/> */}
-        <Route exact path='/recipes'>
-          <Recipes/>
+        <Route exact path="/recipes">
+          <Recipes />
         </Route>
       </RecipesContext.Provider>
-      <Route exact path='/add'>
-        <RecipeForm 
+      <Route exact path="/add">
+        <RecipeForm
           // recipeFormErrors={recipeErrorValues}
           // recipeFormValues={recipeFormValues}
           // validateRecipe={validateRecipe}
