@@ -92,7 +92,7 @@ export default function Register(props) {
           />
         </label>
         <br />
-        <label>
+        {/* <label>
           <span>I agree to the Terms and Conditions</span>
           <input
             id="tos"
@@ -101,14 +101,14 @@ export default function Register(props) {
             checked={registerFormValues.termsOfService === true}
             onChange={onCheckboxChange}
           />
-        </label>
+        </label> */}
         <br />
         <button disabled={disabled}>Create Account</button>
         <div className="errors">
           <div>{registerFormErrors.username}</div>
           <div>{registerFormErrors.email}</div>
           <div>{registerFormErrors.password}</div>
-          <div>{registerFormErrors.termsOfService}</div>
+          {/* <div>{registerFormErrors.termsOfService}</div> */}
         </div>
       </form>
     </div>

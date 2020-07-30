@@ -71,7 +71,7 @@ const initialRegisterFormValues = {
   username: "",
   email: "",
   password: "",
-  termsOfService: false,
+  // termsOfService: false,
 };
 const initialRecipeFormValues = {
   recipeName: "",
@@ -198,7 +198,7 @@ function App() {
       username: registerFormValues.username.trim(),
       email: registerFormValues.email.trim(),
       password: registerFormValues.password,
-      termsOfService: registerFormValues.termsOfService,
+      // termsOfService: registerFormValues.termsOfService,
     };
     postNewUser(newUser);
   };
