@@ -1,22 +1,31 @@
 import React, {useContext} from 'react';
 import {RecipesContext} from '../utils/RecipesContext';
+import {useHistory} from 'react-router-dom';
 
 const Recipes = () =>{
-    const {data} = useContext(RecipesContext);
+    const {recipes} = useContext(RecipesContext);
+    const {push} = useHistory();
+
+    const redirect = () =>{
+        return push('/add')
+    }
 
     return (
         <div>
-            {data.length > 0 && (
+            <div>
+                <button onClick={redirect}>Add a Recipe</button>
+            </div>
+            {recipes.length > 0 && (
                 <div>
-                    {data.map(recipes =>(
-                        <div key={recipes.id}>
-                            <h3>Title:&nbsp;{recipes.title}</h3>
-                            <p>Source:&nbsp;{recipes.source}</p>
-                            {recipes.preptime + recipes.cooktime > 0 && (
-                                <p>Total Time:&nbsp;{recipes.preptime + recipes.cooktime} minutes</p>
+                    {recipes.map(recipe =>(
+                        <div key={recipe.id}>
+                            <h3>Title:&nbsp;{recipe.recipeName}</h3>
+                            <p>Source:&nbsp;{recipe.recipeSource}</p>
+                            {Number(recipe.prepTime) + Number(recipe.cookTime) > 0 && (
+                                <p>Total Time:&nbsp;{Number(recipe.prepTime) + Number(recipe.cookTime)} minutes</p>
                             )}
-                            <p>Ingredients:&nbsp;{recipes.ingredients.length}</p>
-                            <p>Steps:&nbsp;{recipes.steps.length}</p>
+                            <p>Ingredients:&nbsp;{recipe.ingredients}</p>
+                            <p>Steps:&nbsp;{recipe.directions}</p>
                         </div>
                     ))}
                 </div>
