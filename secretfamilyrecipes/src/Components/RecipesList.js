@@ -25,7 +25,7 @@ const Recipes = () =>{
                                 <p>Total Time:&nbsp;{Number(recipe.prepTime) + Number(recipe.cookTime)} minutes</p>
                             )}
                             <p>Ingredients:&nbsp;{recipe.ingredients}</p>
-                            <p>Steps:&nbsp;{recipe.directions}</p>
+                            <p>Steps:&nbsp;{recipe.steps}</p>
                         </div>
                     ))}
                 </div>
