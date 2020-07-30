@@ -86,7 +86,7 @@ const initialRecipeFormValues = {
   prepTime: "",
   cookTime: "",
   ingredients: "",
-  directions: "",
+  steps: "",
 };
 const registerErrorValues = {
   username: "",
@@ -99,10 +99,9 @@ const initialRecipeErrorValues = {
   prepTime: "",
   cookTime: "",
   ingredients: "",
-  directions: "",
+  steps: "",
 };
 const initialUsers = [];
-
 const initialRecipes = [];
 
 const recipeFormSchema = yup.object().shape({
@@ -239,10 +238,9 @@ function App() {
       prepTime: recipeFormValues.prepTime.trim(),
       cookTime: recipeFormValues.cookTime.trim(),
       ingredients: recipeFormValues.ingredients.trim(),
-      directions: recipeFormValues.directions.trim(),
-      id: uuid(),
-    };
-    postNewRecipe(newRecipe);
+      steps: recipeFormValues.steps.trim(),
+    }
+    postNewRecipe(newRecipe)
   };
   //Micherre End
 
