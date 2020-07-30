@@ -7,6 +7,6 @@ export const axiosWithAuth = () =>{
         headers: {
             Authorization: token
         },
-        baseURL: ''
+        baseURL: 'https://cors-anywhere.herokuapp.com/https://secretfamilyrecipe7-20.herokuapp.com/api'
     });
 };

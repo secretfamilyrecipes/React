@@ -15,6 +15,6 @@ const formSchema = yup.object().shape({
     .string()
     .min(8, "Password must be at least 8 characters long")
     .required("Password is required"),
-  termsOfService: yup.bool().oneOf([true], "Field must be checked"),
+  // termsOfService: yup.bool().oneOf([true], "Field must be checked"),
 });
 export default formSchema;
