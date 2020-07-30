@@ -1,12 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 
 export default function Register(props) {
   const {
-    recipeFormErrors,
+    recipeErrorValues,
     recipeFormValues,
     validateRecipe,
     submit,
   } = props;
+  const initialInstructions = []
+  const [instructionItems, setInstructionItems] = useState(initialInstructions)
+
+  const initialIngredients = []
+  const [ingredientItems, setIngredientItems] = useState(initialIngredients)
+  
+  const addStep = (e) => setInstructionItems([...instructionItems, e.target.value])
+  const addIng = (e) => setIngredientItems([...ingredientItems, e.target.value])
+
   const onSubmit = (evt) => {
     evt.preventDefault();
     submit();
@@ -60,27 +69,34 @@ export default function Register(props) {
           type="text"
           placeholder="Ingredients"
         />
-      </label>
-      <label htmlFor="directions">
-        Directions:
+        <button onClick={addIng}>Add Ingredient</button>
+        </label>
+        <div>
+          {ingredientItems.map(ingredient => (<div>{ingredient}</div>))}
+        </div>
+      <label htmlFor="steps">
+        Steps:
         <input
-          id="directions"
-          name="directions"
-          value={recipeFormValues.directions}
+          id="steps"
+          name="steps"
+          value={recipeFormValues.steps}
           onChange={onInputChange}
           type="text"
-          placeholder="Directions"
+          placeholder="Steps"
         />
+        <button onClick={addStep}>Add Step</button>
       </label>
-
+      <div>
+        {instructionItems.map(instruction => (<div>{instruction}</div>))}
+      </div>
       <button> Add Recipe </button>
       <div className="errors">
-        <div>{recipeFormErrors.recipeName}</div>
-        <div>{recipeFormErrors.recipeSource}</div>
-        <div>{recipeFormErrors.prepTime}</div>
-        <div>{recipeFormErrors.cookTime}</div>
-        <div>{recipeFormErrors.ingredients}</div>
-        <div>{recipeFormErrors.directions}</div>
+        <div>{recipeErrorValues.recipeName}</div>
+        <div>{recipeErrorValues.recipeSource}</div>
+        <div>{recipeErrorValues.prepTime}</div>
+        <div>{recipeErrorValues.cookTime}</div>
+        <div>{recipeErrorValues.ingredients}</div>
+        <div>{recipeErrorValues.directions}</div>
       </div>
     </form>
   );

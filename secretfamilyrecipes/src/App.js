@@ -32,7 +32,7 @@ const initialRecipeFormValues = {
   prepTime: "",
   cookTime: "",
   ingredients: "",
-  directions: "",
+  steps: "",
 };
 const registerErrorValues = {
   username: "",
@@ -45,10 +45,9 @@ const initialRecipeErrorValues ={
   prepTime: "",
   cookTime: "",
   ingredients: "",
-  directions: "",
+  steps: "",
 };
 const initialUsers = [];
-
 const initialRecipes = [];
 
 const recipeFormSchema = yup.object().shape({
@@ -69,7 +68,6 @@ const recipeFormSchema = yup.object().shape({
 });
 
 const initialDisabled = true;
-
 
 function App() {
   // const [loginFormValues, setLoginFormValues] = useState(
@@ -98,7 +96,7 @@ function App() {
         console.log(err);
       });
   };
-  
+
   const postNewRecipe = (newRecipe) => {
     axios
       .post("noidea", newRecipe)
@@ -159,10 +157,10 @@ function App() {
       .validate(e.target.value)
       .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
       .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
-      
-      setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
-  };
-  
+
+  setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
+};
+
 
   const submitNewRecipe = () => {
     const newRecipe = {
@@ -171,7 +169,7 @@ function App() {
       prepTime: recipeFormValues.prepTime.trim(),
       cookTime: recipeFormValues.cookTime.trim(),
       ingredients: recipeFormValues.ingredients.trim(),
-      directions: recipeFormValues.directions.trim(),
+      steps: recipeFormValues.steps.trim(),
     }
     postNewRecipe(newRecipe)
   }
@@ -185,7 +183,7 @@ function App() {
 
   return (
     <div className="App">
-      <Route exact path="/login">
+        <Route exact path="/login">
         <Login
           login={login}
           loginSubmit={loginSubmit}
