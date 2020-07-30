@@ -1,6 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {RecipesContext} from '../utils/RecipesContext';
 import {useHistory} from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css'
+
+
 
 export default function Recipes (){
     const {recipes} = useContext(RecipesContext);
@@ -9,6 +12,10 @@ export default function Recipes (){
     const redirect = () =>{
         return push('/add')
     }
+
+    useEffect(() => {
+        
+    },[])
 
     return (
         <div>
