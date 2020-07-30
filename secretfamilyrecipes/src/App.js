@@ -9,7 +9,7 @@ import Register from "./Components/Register";
 import styled from "styled-components";
 import { dummydata } from "./utils/dummydata";
 import { RecipesContext } from "./utils/RecipesContext";
-import Recipes from "./Components/RecipesList";
+import RecipesList from "./Components/RecipesList";
 import RecipeForm from "./Components/RecipeForm";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 import PrivateRoute from "./Components/PrivateRoute";
@@ -135,6 +135,7 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [login, setLogin] = useState(initialLoginFormValues);
 
+  //recipies form states - royer adames
   const [recipeFormValues, setRecipeFormValues] = useState(
     initialRecipeFormValues
   );
@@ -142,7 +143,6 @@ function App() {
     initialRecipeErrorValues
   );
   const [recipes, setRecipes] = useState(initialRecipes);
-  console.log(recipes);
 
   //Shanon Start
   const { push } = useHistory();
@@ -300,12 +300,20 @@ function App() {
 
   const onRecipeSubmit = (event) => {
     event.preventDefault();
-
-    const newRecipe = { ...recipeFormValues, id: uuid() };
-    setRecipes([newRecipe, ...recipes]);
-    setRecipeFormValues(initialRecipeFormValues);
-
-    push("/recipes");
+    const newRecipe = { ...recipeFormValues };
+    // royer code
+    axios.post('https://reqres.in/api/users', newRecipe)
+      .then(resp => {
+        //shanon fritz code
+        setRecipes([ ...recipes, resp.data]);
+        setRecipeFormValues(initialRecipeFormValues);
+        push("/recipes");
+        //shanon fritz code
+      })
+      .catch(error => {
+        debugger
+      })
+    //end of royer code
   };
 
   const onRecipeChange = (event) => {
@@ -350,12 +358,17 @@ function App() {
           to sign in.
         </p>
       </Route>
+
+      {/* recipes-list-royer-adames  */}
+      {/* render a list of receipts */}
       <RecipesContext.Provider value={{ recipes }}>
         {/* <PrivateRoute exact path='/recipes' component={Recipes}/> */}
         <Route exact path="/recipes">
-          <Recipes />
+          <RecipesList />
         </Route>
       </RecipesContext.Provider>
+      {/* recipes-list-royer-adames  */}
+
       <Route exact path="/add">
         <RecipeForm
           // recipeFormErrors={recipeErrorValues}
