@@ -1,18 +1,72 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import axios from "axios";
-import { Link, Route } from "react-router-dom";
-// import "./App.css";
+import { Link, Route, useHistory } from "react-router-dom";
+import "./App.css";
 import Login from "./Components/Login";
 import * as yup from "yup";
 import formSchema from "./validation/formSchema";
 import Register from "./Components/Register";
-import {dummydata} from './utils/dummydata';
-import {RecipesContext} from './utils/RecipesContext';
-import Recipes from './Components/RecipesList';
-import Recipe from './Components/Recipe';
+import styled from "styled-components";
+import { dummydata } from "./utils/dummydata";
+import { RecipesContext } from "./utils/RecipesContext";
+import RecipesList from "./Components/RecipesList";
+import RecipeForm from "./Components/RecipeForm";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
+import PrivateRoute from "./Components/PrivateRoute";
+import { v4 as uuid } from "uuid";
 
 const data = dummydata;
+const AppStyle = styled.div`
+  text-align: center;
+  /* background: #dfce9d; */
+  .afterForm {
+    font-size: 3rem;
+  }
+  .formContainer {
+    h1 {
+      font-size: 7rem;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 1% auto;
+    background: #1799b5;
+    padding: 1% 0;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px grey;
+    .errors {
+      color: white;
+    }
+    input {
+      height: 3vh;
+      /* background: black;
+      color: white; */
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+    span {
+      font-size: 3rem;
+      color: white;
+    }
+    label {
+      font-size: 3rem;
+      color: white;
+    }
+    button {
+      padding: 1%;
+      background: #e25822;
+      border-radius: 10px;
+      color: gainsboro;
+    }
+  }
+  .clickHere {
+    display: inline;
+    text-decoration: none;
+  }
+`;
 
 const initialLoginFormValues = {
   email: "",
@@ -24,7 +78,7 @@ const initialRegisterFormValues = {
   username: "",
   email: "",
   password: "",
-  termsOfService: false,
+  // termsOfService: false,
 };
 const initialRecipeFormValues = {
   recipeName: "",
@@ -39,7 +93,7 @@ const registerErrorValues = {
   password: "",
   email: "",
 };
-const initialRecipeErrorValues ={
+const initialRecipeErrorValues = {
   recipeName: "",
   recipeSource: "",
   prepTime: "",
@@ -60,7 +114,7 @@ const recipeFormSchema = yup.object().shape({
     .required("Recipe Source is Required")
     .min(2, "Must be at least 2 characters long"),
   // prepTime: yup
-  //   .string()   
+  //   .string()
   //   .min(2, "Must be at least 2 characters long"),
   // cookTime: yup
   //   .string()
@@ -81,46 +135,60 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [login, setLogin] = useState(initialLoginFormValues);
 
-  const [recipeFormValues, setRecipeFormValues] = useState(initialRecipeFormValues);
-  const [recipeErrorValues, setRecipeErrorValues] = useState(initialRecipeErrorValues);
+  //recipies form states - royer adames
+  const [recipeFormValues, setRecipeFormValues] = useState(
+    initialRecipeFormValues
+  );
+  const [recipeErrorValues, setRecipeErrorValues] = useState(
+    initialRecipeErrorValues
+  );
   const [recipes, setRecipes] = useState(initialRecipes);
 
-  const postNewUser = (newUser) => {
-    axios
-      .post("https://reqres.in/api/users", newUser)
-      .then((res) => {
-        setUsers([res.data], ...users);
-        setRegisterFormValues(initialRegisterFormValues);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //Shanon Start
+  const { push } = useHistory();
+  //Shanon End
 
-  const postNewRecipe = (newRecipe) => {
-    axios
-      .post("noidea", newRecipe)
-      .then((res) => {
-        setUsers([res.data], ...recipes);
-        setRegisterFormValues(initialRecipeFormValues);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // Sam Start
+  // const postNewUser = (newUser) => {
+  //   axios
+  //     .post("https://reqres.in/api/users", newUser)
+  //     .then((res) => {
+  //       setUsers([res.data], ...users);
+  //       setRegisterFormValues(initialRegisterFormValues);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  //Sam End
 
-  const loginSubmit = (evt) => {
-    evt.preventDefault();
-    axios
-      .post("https://reqres.in/api/users", login)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    submit();
-  };
+  //Micherre Start
+  // const postNewRecipe = (newRecipe) => {
+  //   axios
+  //     .post("noidea", newRecipe)
+  //     .then((res) => {
+  //       setRecipes([res.data], ...recipes);
+  //       setRecipeFormValues(initialRecipeFormValues);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  //Micherre End
+
+  //Sam Start
+  // const loginSubmit = (evt) => {
+  //   evt.preventDefault();
+  //   axios
+  //     .post("https://reqres.in/api/users", login)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   submit();
+  // };
   const inputChange = (name, value) => {
     yup
       .reach(formSchema, name)
@@ -146,21 +214,22 @@ function App() {
       username: registerFormValues.username.trim(),
       email: registerFormValues.email.trim(),
       password: registerFormValues.password,
-      termsOfService: registerFormValues.termsOfService,
+      // termsOfService: registerFormValues.termsOfService,
     };
     postNewUser(newUser);
   };
+  //Sam End
 
-  const validateRecipe = (e) => {
-    yup
-      .reach(recipeFormSchema, e.target.name)
-      .validate(e.target.value)
-      .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
-      .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
+  //Micherre Start
+  // const validateRecipe = (e) => {
+  //   yup
+  //     .reach(recipeFormSchema, e.target.name)
+  //     .validate(e.target.value)
+  //     .then(() => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: ""}))
+  //     .catch(err => setRecipeErrorValues({...recipeErrorValues, [e.target.name]: err.errors[0]}));
 
-  setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
-};
-
+  //     setRecipeFormValues({ ...recipeFormValues, [e.target.name]: e.target.value});
+  // };
 
   const submitNewRecipe = () => {
     const newRecipe = {
@@ -172,26 +241,103 @@ function App() {
       steps: recipeFormValues.steps.trim(),
     }
     postNewRecipe(newRecipe)
-  }
+  };
+  //Micherre End
 
-
+  //Sam Start
   useEffect(() => {
     formSchema.isValid(registerFormValues).then((valid) => {
       setDisabled(!valid);
     });
   }, [registerFormValues]);
+  //Sam End
+
+  //Shanon Start
+  const postNewUser = (newUser) => {
+    axiosWithAuth()
+      .post("/auth/register", newUser)
+      .then((res) => {
+        console.log(res);
+        // setUsers(...users, [res.data]);
+        // setRegisterFormValues(initialRegisterFormValues);
+        // push('/login');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const loginSubmit = (event) => {
+    event.preventDefault();
+    axiosWithAuth()
+      .post("/auth/login", login)
+      .then((res) => {
+        console.log(res);
+        // localStorage.setItem('token', res.data.payload);
+        // push('/recipes');
+      });
+  };
+
+  const postNewRecipe = (newRecipe) => {
+    // axiosWithAuth().post('/recipes', newRecipe)
+    //   .then(res =>{
+    //     console.log(res);
+    //     // setRecipes(...recipes, [res.data]);
+    //     // setRecipeFormValues(initialRecipeFormValues);
+    //     // push('/recipes');
+    //   })
+    //   .catch(err =>{
+    //     console.log(err);
+    //   });
+    setRecipes(...recipes, [newRecipe]);
+    setRecipeFormValues(initialRecipeFormValues);
+    push("/recipes");
+  };
+
+  const recipeHandleChange = (name, value) => {
+    setRecipeFormValues({ ...recipeFormValues, [name]: value });
+  };
+
+  const onRecipeSubmit = (event) => {
+    event.preventDefault();
+    const newRecipe = { ...recipeFormValues };
+    // royer code
+    axios.post('https://reqres.in/api/users', newRecipe)
+      .then(resp => {
+        //shanon fritz code
+        setRecipes([ ...recipes, resp.data]);
+        setRecipeFormValues(initialRecipeFormValues);
+        push("/recipes");
+        //shanon fritz code
+      })
+      .catch(error => {
+        debugger
+      })
+    //end of royer code
+  };
+
+  const onRecipeChange = (event) => {
+    setRecipeFormValues({
+      ...recipeFormValues,
+      [event.target.name]: event.target.value,
+    });
+  };
+  //Shanon End
 
   return (
-    <div className="App">
-        <Route exact path="/login">
+    <AppStyle className="App">
+      <Route exact path="/login">
         <Login
           login={login}
           loginSubmit={loginSubmit}
           loginChange={loginChange}
         />
-        <p>
-          Don't have an account? <Link to="/">Click here</Link> to create a new
-          account.
+        <p className="afterForm">
+          Don't have an account?{" "}
+          <Link to="/" className="clickHere">
+            Click here
+          </Link>{" "}
+          to create a new account.
         </p>
       </Route>
 
@@ -204,24 +350,39 @@ function App() {
           submit={submit}
           disabled={disabled}
         />
-        <p>
-          Already have an account? <Link to="/login">Click here</Link> to sign
-          in.
+        <p className="afterForm">
+          Already have an account?{" "}
+          <Link to="/login" className="clickHere">
+            Click here
+          </Link>{" "}
+          to sign in.
         </p>
       </Route>
-      <RecipesContext.Provider value={{data}}>
-        <Route exact path='/recipes'>
-          <Recipes/>
+
+      {/* recipes-list-royer-adames  */}
+      {/* render a list of receipts */}
+      <RecipesContext.Provider value={{ recipes }}>
+        {/* <PrivateRoute exact path='/recipes' component={Recipes}/> */}
+        <Route exact path="/recipes">
+          <RecipesList />
         </Route>
       </RecipesContext.Provider>
-      <Recipe 
-        recipeFormErrors={recipeErrorValues}
-        recipeFormValues={recipeFormValues}
-        validateRecipe={validateRecipe}
-        submit={submit}
-      />
-    </div>
+      {/* recipes-list-royer-adames  */}
+
+      <Route exact path="/add">
+        <RecipeForm
+          // recipeFormErrors={recipeErrorValues}
+          // recipeFormValues={recipeFormValues}
+          // validateRecipe={validateRecipe}
+          // submit={submitNewRecipe}
+          // recipeHandleChange={recipeHandleChange}
+          recipeFormValues={recipeFormValues}
+          onSubmit={onRecipeSubmit}
+          onChange={onRecipeChange}
+        />
+      </Route>
+    </AppStyle>
   );
-};
+}
 
 export default App;
