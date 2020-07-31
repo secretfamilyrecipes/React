@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import Styled from 'styled-components'
+import {  Icon } from 'semantic-ui-react'
 
 const Styles = Styled.div`
   /* royer adames */
     /* general styles */
     font-family: "Akronim", cursive;
     letter-spacing: 1rem;
+    .icon{
+      color:white;
+    }
+    .food{
+      display:inline;
+    }
     .title-container{
       border: .1rem solid white;
     }
@@ -78,6 +85,9 @@ const Styles = Styled.div`
       padding: 2rem 0;
       margin-top: 5rem;
     }
+    .submit-text{
+      display:inline;
+    }
   /* royer adames */
 `
 export default function Register(props) {
@@ -110,7 +120,7 @@ export default function Register(props) {
     <Styles>
       <form onSubmit={onSubmit}>
         <div class="container title-container">
-          <h1 className='title'>New recipe</h1>
+          <h1 className='title'><Icon name='book' />New recipe</h1>
         </div>
         {/* Recipe name */}
         <div className='recipe-name-container container'>
@@ -182,7 +192,7 @@ export default function Register(props) {
             />
           </div>
           <div class="recipe-ingredients-btn-container btn-container">
-            <button className='btn' onClick={addIng}>Add Ingredient</button>
+            <button className='btn' onClick={addIng}><span className='submit-text'><Icon name='add' />Add Ingredient</span></button>
           </div>
           <div className='recipe-ingredient-items'>
             {ingredientItems.map(ingredient => (<div>{ingredient}</div>))}
@@ -204,14 +214,14 @@ export default function Register(props) {
             />
           </div>
           <div class="recipe-steps-btn-container btn-container">
-            <button className='btn' onClick={addStep}>Add Step</button>
+            <button className='btn' onClick={addStep}><span className='submit-text'><Icon name='add' />Add Step</span> </button>
           </div>
           <div className='instruction-items'>
             {instructionItems.map(instruction => (<div>{instruction}</div>))}
           </div>
         </div>
         {/* submit button */}
-        <button type='submit' className='btn submit'> Add Recipe </button>
+        <button type='submit' className='btn submit' Icon='food'> <span className='submit-text'><Icon name='food' />Add Recipe<Icon name='food' /></span> </button>
         {/* <div className="errors">
         <div>{recipeErrorValues.recipeName}</div>
         <div>{recipeErrorValues.recipeSource}</div>
