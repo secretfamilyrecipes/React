@@ -1,7 +1,11 @@
 //royer adames
 import React from 'react'
 import { Card, Icon, List } from 'semantic-ui-react'
+import Styled from 'styled-components'
 
+const styles = Styled.div`
+    
+`
 export default function RecipiesList({ recipes,  redirect}) {
     // function unpackAllRecipes() {
     //     let unpackRecipes
